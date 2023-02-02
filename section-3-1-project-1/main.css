@@ -70,6 +70,14 @@ button {
   border: none;
   margin-right: 10px;
 }
+button:hover {
+  background-color: #eefe83;
+  color: black;
+}
+button:active {
+  background-color: #e09d65;
+}
+
 
 label{
   color: #fff;
