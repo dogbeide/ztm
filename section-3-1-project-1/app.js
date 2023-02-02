@@ -18,7 +18,10 @@ let vm = Vue.createApp({
       this.rotateZ = 0;
     },
     async onCopy() {
-      let text = `transform: ${this.computed_styles.transform};`
+      let text = `
+        transform: ${this.computed_styles.transform};
+        background: ${this.color};
+      `
       await navigator.clipboard.writeText(text)
       alert('Copied stats to clipboard')
     }
