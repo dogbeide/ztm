@@ -15,13 +15,13 @@
           <label>perspective: {{ get_perspective }}px;</label>
           <input type="range" min="0" max="999" v-model="perspective" />
 
-          <label>rotateX: {{ get_rotateX }}deg; </label>
+          <label :style="x_style">rotateX: {{ get_rotateX }}deg; </label>
           <input type="range" min="-180" max="180" v-model="rotateX" />
 
-          <label>rotateY: {{ get_rotateY }}deg; </label>
+          <label :style="y_style">rotateY: {{ get_rotateY }}deg; </label>
           <input type="range" min="-180" max="180" v-model="rotateY" />
 
-          <label>rotateZ: {{ get_rotateZ }}deg; </label>
+          <label :style="z_style">rotateZ: {{ get_rotateZ }}deg; </label>
           <input type="range" min="-180" max="180" v-model="rotateZ" />
 
           <button type="button" @click.prevent="onReset">Reset</button>
