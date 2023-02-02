@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>VueJS Conditional Rendering</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+  <div id="app">
+    <p v-if="mode == 1">if: This is conditionally rendered if true</p>
+    <template v-else-if="mode == 2">
+      <p>Extraaa!!</p>
+      <h3>else if: when backup condition is true</h3>
+    </template>
+    <i v-else>else: default if all false</i>
+
+    <h1 v-show="mode == 2">v-show: yes it's a ShowwwTTIIIME@@</h1>
+
+    <select v-model="mode">
+      <option value="1">v-if</option>
+      <option value="2">v-else-if</option>
+      <option value="0">v-else</option>
+    </select>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
