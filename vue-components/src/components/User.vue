@@ -1,5 +1,6 @@
 <template>
-  <button type="button" @click="onUpdateAge">Update age</button>
+  <button type="button" @click="onUpdateAge">Update age (emit event)</button>
+  <button type="button" @click="updateAgeCB(3)">Update age (callback)</button>
   <p>The User is {{ age  }} years old</p>
   <p>{{ ageX2 }}</p>
 </template>
@@ -15,7 +16,8 @@ export default {
       validator(value) {
         return value <= 130
       }
-    }
+    },
+    updateAgeCB: Function
   },
   emits: ['age-inc'],
   computed: {
