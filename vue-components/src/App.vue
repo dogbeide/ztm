@@ -1,14 +1,15 @@
 <template>
-  <p>{{ msg }}</p>
+  <p>some text</p>
+  <Greeting></Greeting>
 </template>
 
 <script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      msg: "wazaaap"
+  import Greeting from '@/components/Greeting.vue'
+
+  export default {
+    name: 'App',
+    components: {
+      Greeting
     }
   }
-}
 </script>
