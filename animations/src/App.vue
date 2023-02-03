@@ -6,8 +6,19 @@
     <h2 v-else key="other">Anther txt</h2>
   </transition> -->
 
-  <transition name="zoom" type="animation" appear>
+  <!-- <transition name="zoom" type="animation" appear>
     <h2 v-if="flag">some more text</h2>
+  </transition> -->
+
+  <transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+  >
+    <h1 v-if="flag">js animated</h1>
   </transition>
   
 </template>
@@ -18,6 +29,28 @@ export default {
   data() {
     return {
       flag: true
+    }
+  },
+  methods: {
+    beforeEnter(el) {
+      console.log('beforeEnter()', el)
+    },
+    enter(el, done) {
+      console.log('enter()', el)
+      done()
+    },
+    afterEnter(el) {
+      console.log('afterEnter()', el)
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave()', el)
+    },
+    leave(el, done) {
+      console.log('leave()', el)
+      done()
+    },
+    afterLeave(el) {
+      console.log('afterLeave()', el)
     }
   }
 }
