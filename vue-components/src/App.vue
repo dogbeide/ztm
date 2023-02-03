@@ -22,7 +22,11 @@ export default {
   },
   methods: {
     updateAge(num) {
-      this.age += num
+      if (this.age + num >= 130) {
+        this.age = 130
+      } else {
+        this.age += num
+      }
     }
   }
 }
