@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="flag = !flag">Toggle animation</button>
+  <!-- <button type="button" @click="flag = !flag">Toggle animation</button> -->
 
   <!-- <transition name="fade" mode="out-in">
     <h2 v-if="flag" key="main">some text</h2>
@@ -10,7 +10,7 @@
     <h2 v-if="flag">some more text</h2>
   </transition> -->
 
-  <transition
+  <!-- <transition
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="afterEnter"
@@ -21,7 +21,19 @@
     name="fade"
   >
     <h1 v-if="flag">js animated</h1>
-  </transition>
+  </transition> -->
+
+  <button @click="addItem">bOOtun</button>
+
+  <ul>
+    <transition-group name="fade">
+      <li v-for="(item, index) in items" :key="item"
+      @click="removeItem(index)"
+      >
+        {{ item }}
+      </li>
+    </transition-group>
+  </ul>
   
 </template>
 
@@ -30,10 +42,19 @@ export default {
   name: 'App',
   data() {
     return {
-      flag: true
+      flag: true,
+      items: [1, 2, 3, 4, 5]
     }
   },
   methods: {
+    addItem() {
+      const num = Math.ceil(Math.random() * 100);
+      const index = Math.ceil(Math.random() * this.items.length);
+      this.items.splice(index, 0, num);
+    },
+    removeItem(index) {
+      this.items.splice(index, 1);
+    },
     beforeEnter(el) {
       console.log('beforeEnter()', el)
     },
@@ -66,20 +87,32 @@ export default {
 </script>
 
 <style>
+li {
+  font-size: 22px;
+  cursor: pointer;
+}
+
 h2 {
   width: 400px;
   padding: 20px;
   margin: 20px;
 }
+
 .fade-enter-from {
   opacity: 0;
 }
 .fade-enter-active {
   transition: all 0.25s linear;
 }
+.fade-leave-active {
+  position: absolute;
+}
 .fade-leave-to {
   opacity: 0;
   transition: all 0.08s linear;
+}
+.fade-move {
+  transition: all 0.25s linear;
 }
 
 .zoom-enter-from {
