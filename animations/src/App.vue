@@ -26,7 +26,10 @@
   <button @click="addItem">bOOtun</button>
 
   <ul>
-    <transition-group name="fade">
+    <transition-group name="fade"
+      enter-active-class="animate__animated animate__flipInX"
+      leave-active-class="animate__animated animate__flipOutX"
+    >
       <li v-for="(item, index) in items" :key="item"
       @click="removeItem(index)"
       >
@@ -96,6 +99,13 @@ h2 {
   width: 400px;
   padding: 20px;
   margin: 20px;
+}
+
+.animate__flipOutX {
+  position: absolute;
+}
+.animate__animated {
+  animation-duration: 0.4s;
 }
 
 .fade-enter-from {
