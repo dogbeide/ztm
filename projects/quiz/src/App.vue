@@ -1,15 +1,18 @@
 <template>
   <div class="ctr">
-    <questions v-if="questionsAnswered < questions.length"
-      :questions="questions"
-      :questionsAnswered="questionsAnswered"
-      @question-answered="onQuestionAnswered"
-     />
-    <result v-else 
-      :answersCorrect="answersCorrect" 
-      :numQuestions="numQuestions" 
-    />
-    <button type="button" class="reset-btn">Reset</button>
+    <transition name="fade" mode="out-in">
+      <questions v-if="questionsAnswered < questions.length"
+        :questions="questions"
+        :questionsAnswered="questionsAnswered"
+        :activeQuestion="activeQuestion"
+        @question-answered="onQuestionAnswered"
+      />
+      <result v-else 
+        :answersCorrect="answersCorrect" 
+        :results="results"
+      />
+    </transition>
+    <button v-if="questionsAnswered == questions.length" @click.prevent="onReset" type="button" class="reset-btn">Reset</button>
   </div>
 </template>
 
@@ -24,6 +27,7 @@ export default {
     return {
       questionsAnswered: 0,
       answersCorrect: 0,
+      activeQuestion: 0,
       questions: [
           {
               q: 'What is 2 + 2?', 
@@ -104,9 +108,15 @@ export default {
   methods: {
     onQuestionAnswered(isCorrect) {
       this.questionsAnswered++;
+      this.activeQuestion++;
       if (isCorrect) {
         this.answersCorrect++;
       }
+    },
+    onReset() {
+      this.questionsAnswered = 0;
+      this.answersCorrect = 0;
+      this.activeQuestion = 0;
     }
   }
 }

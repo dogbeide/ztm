@@ -7,7 +7,8 @@
           <div class="status">{{ questionsAnswered }} out of {{ questions.length }} questions answered</div>
       </div>
 
-      <template v-for="(question, index) in questions" :key="question.q">
+      <transition-group name="fade">
+        <template v-for="(question, index) in questions" :key="question.q">
         <div class="single-question" v-show="activeQuestion == index">
           <div class="question">{{ question.q }}</div>
           <div class="answers">
@@ -17,7 +18,9 @@
               >{{ answer.text }}</div>
           </div>
         </div>
-      </template>
+        </template>
+      </transition-group>
+      
       
   </div>
 </template>
@@ -27,19 +30,14 @@ export default {
   name: 'Questions',
   props: {
     questions: Array,
-    questionsAnswered: Number
+    questionsAnswered: Number,
+    activeQuestion: Number,
   },
   emits: ['question-answered'],
-  data() {
-    return {
-      activeQuestion: 0
-    }
-  },
   methods: {
     onClickAnswer(answer) {
       const correct = answer.is_correct;
       this.$emit('question-answered', correct);
-      this.activeQuestion++;
     }
   }
 }
