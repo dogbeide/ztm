@@ -17,6 +17,7 @@
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
+    :css="false"
   >
     <h1 v-if="flag">js animated</h1>
   </transition>
@@ -37,7 +38,11 @@ export default {
     },
     enter(el, done) {
       console.log('enter()', el)
-      done()
+
+      const animation = el.animate([{ transform: "scale3d(0,0,0)"}, {}], {
+        duration: 1000
+      })
+      animation.onFinish = () => {done()}
     },
     afterEnter(el) {
       console.log('afterEnter()', el)
@@ -47,7 +52,10 @@ export default {
     },
     leave(el, done) {
       console.log('leave()', el)
-      done()
+      const animation = el.animate([{ }, {transform: "scale3d(0,0,0)"}], {
+        duration: 1000
+      })
+      animation.onFinish = () => {done()}
     },
     afterLeave(el) {
       console.log('afterLeave()', el)
